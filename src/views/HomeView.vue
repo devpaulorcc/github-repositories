@@ -25,11 +25,28 @@
         </button>
       </div>
       <div v-for="repository in repositories" :key="repository.id">
-        <div class="card">
+        <a :href="repository.html_url" target="_blank" class="card">
           <h3>{{ repository.name }}</h3>
-          <p class="link">{{ repository.clone_url }}</p>
-        </div>
+          <h4 v-if="repository.language"> {{repository.language}}</h4>
+          <p class="link" v-if="repository.description">{{ repository.description }}</p>
+          <p class="link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-star-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+              />
+            </svg>
+            {{ repository.stargazers_count }}
+          </p>
+        </a>
       </div>
+
       <div v-if="!result">
         <p>Nenhum usuário no Github foi encontrado...</p>
       </div>
@@ -51,25 +68,28 @@ const result = ref(true);
 const searchRepositories = () => {
   githubApi.get(`${searchValue.value}/repos`).then((response) => {
     repositories.value = response.data;
-    if(response.data.length == 0){
-      result.value = false
+    if (response.data.length == 0) {
+      result.value = false;
     } else {
-      result.value = true
+      result.value = true;
     }
   });
 };
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 
 .layout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; 
+  min-height: 100vh;
 }
 
 main {
-  flex: 1; 
+  flex: 1;
   padding-bottom: 2rem;
 }
 
