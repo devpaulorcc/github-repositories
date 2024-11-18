@@ -20,10 +20,14 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Access the url for the project
+```
+https://paulorcc-repos.vercel.app/
+```
+<br>
+<hr>
+<br>
 
-### Tools
 <p align="center">
     <img src="https://skillicons.dev/icons?i=vscode,vue,js,typescript" />
 </p>
