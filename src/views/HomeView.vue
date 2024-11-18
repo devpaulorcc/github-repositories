@@ -27,8 +27,10 @@
       <div v-for="repository in repositories" :key="repository.id">
         <a :href="repository.html_url" target="_blank" class="card">
           <h3>{{ repository.name }}</h3>
-          <h4 v-if="repository.language"> {{repository.language}}</h4>
-          <p class="link" v-if="repository.description">{{ repository.description }}</p>
+          <h4 v-if="repository.language">{{ repository.language }}</h4>
+          <p class="link" v-if="repository.description">
+            {{ repository.description }}
+          </p>
           <p class="link">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -66,6 +68,10 @@ const searchValue = ref("");
 const result = ref(true);
 
 const searchRepositories = () => {
+  if (searchValue.value.trim() === "") {
+    return result.value = false;
+  }
+
   githubApi.get(`${searchValue.value}/repos`).then((response) => {
     repositories.value = response.data;
     if (response.data.length == 0) {
