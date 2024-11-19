@@ -26,7 +26,6 @@ https://paulorcc-repos.vercel.app/
 ```
 <br>
 <hr>
-<br>
 
 <p align="center">
     <img src="https://skillicons.dev/icons?i=vscode,vue,js,typescript" />
